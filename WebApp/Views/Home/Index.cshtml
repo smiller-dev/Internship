@@ -1,0 +1,17 @@
+﻿
+
+<ejs-grid id="Grid" gridLines="Both" allowPaging="true" allowSorting="true" allowFiltering="true" allowTextWrap="true" allowResizing="true" width="100%">
+    <e-data-manager url="/Home/UrlDatasource" )" adaptor="UrlAdaptor"></e-data-manager>
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" newRowPosition="Top"></e-grid-editSettings>
+    <e-grid-pagesettings pageSizes="true" pageCount="20"></e-grid-pagesettings>
+    <e-grid-filterSettings type="Excel"></e-grid-filterSettings>
+    <e-grid-textwrapsettings wrapMode="Both"></e-grid-textwrapsettings>
+    <e-grid-columns>
+        <e-grid-column field="Id" headerText="ID" textAlign="Right" width="120"></e-grid-column>
+        <e-grid-column field="Date" headerText="Date" width="150"></e-grid-column>
+        <e-grid-column field="TemperatureC" headerText="TemperatureC" width="130" textAlign="Right"></e-grid-column>
+        <e-grid-column field="TemperatureF" headerText="TemperatureF" width="120"></e-grid-column>
+        <e-grid-column field="City" headerText="City" width="120"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+
