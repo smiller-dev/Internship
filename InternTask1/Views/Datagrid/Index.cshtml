@@ -1,0 +1,59 @@
+﻿@model InternTask1.Controllers.DatagridController
+@using Syncfusion.EJ2;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Syncfusion.EJ2
+
+
+<ejs-grid id="Grid", dataSource="@ViewBag.datasource">
+    <e-data-manager url="@Url.Action("UrlDatasource", "Grid")" adaptor="UrlAdaptor"></e-data-manager>
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" newRowPosition="Top"></e-grid-editSettings>
+     <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+     <e-grid-columns>
+        <e-grid-column field="ID" headerText="ID" textAlign="Right" width="120"></e-grid-column>
+        <e-grid-column field="Date" headerText="Date"  width="150"></e-grid-column> 
+        <e-grid-column field="TemperatureC" headerText="TemperatureC" width="130" textAlign="Right" ></e-grid-column>      
+        <e-grid-column field="TemperatureF" headerText="TemperatureF" width="120"></e-grid-column>
+        <e-grid-column field="City" headerText="City" width="120"></e-grid-column>
+    </e-grid-columns>
+</ejs-grid>
+<div class="col-lg-3 property-section">
+        <table id="property" title="Properties" style="width: 100%">
+            <tr>
+                <td style="width: 100%">
+                    <div style="padding-top: 7px">Add New Row Position</div>
+                </td>
+                <td style="width: 50%;padding-right: 10px">
+                    <div id='typeddl'>
+                        <ejs-dropdownlist id="newRowPosition" dataSource="@ViewBag.ddDataSource" value="@("Top")" change="rowPositionChange" popupHeight="220px"></ejs-dropdownlist>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+<style>
+        #typeddl {
+            min-width: 100px;
+        }
+    </style>
+     <script>
+
+       function rowPositionChange(args) { 
+           var grid = document.getElementById("Grid").ej2_instances[0];           
+           grid.editSettings.newRowPosition = this.value;
+       }
+
+       function actionBegin(args) {
+            var grid = document.getElementById("Grid").ej2_instances[0];
+            if (args.requestType === 'save') {
+                if (grid.pageSettings.currentPage !== 1 && grid.editSettings.newRowPosition === 'Top') {
+                    args.index = (grid.pageSettings.currentPage * grid.pageSettings.pageSize) - grid.pageSettings.pageSize;
+                } else if (grid.editSettings.newRowPosition === 'Bottom') {
+                    args.index = (grid.pageSettings.currentPage * grid.pageSettings.pageSize) - 1;
+                }
+            }
+       }
+
+    </script>
+   
+
+            
